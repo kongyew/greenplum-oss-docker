@@ -1,0 +1,14 @@
+# Exclude these files from docker build context - this will speed-up build process
+
+*/*/*.ova
+*/*/eula_acceptance*
+*/*/*.msi
+*/*/*.pdf
+*/*/*.jar
+*/*/greenplum-clients*.zip
+*/*/greenplum-db-*-rhel7-x86_64.*
+*/*/greenplum-db-appliance-*-rhel6-x86_64.zip
+*/*/greenplum-loaders*
+#*/*/*.gppkg
+
+*/*/PROGRESS_DATADIRECT*

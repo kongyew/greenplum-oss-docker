@@ -1,0 +1,93 @@
+#
+#  Ubuntu Dockerfile for open source Greenplum
+#
+#FROM ubuntu:xenial
+FROM phusion/baseimage
+ENV LANG en_US.UTF-8
+
+# Argument
+ARG build_env=test
+#ARG GPDB_VERSION="5.7.0-rhel6-x86_64"
+#ARG GPDB_DOWNLOAD="greenplum-downloader/DOWNLOAD_5.7.0"
+
+# Passing argument to this env variable inside your Dockerfile:
+ENV ENV_GPDB_VERSION=$GPDB_VERSION
+
+################################################################################
+COPY configs /opt/configs/
+COPY madlib    /opt/madlib/
+COPY dblink    /opt/dblink/
+COPY gphdfs    /opt/gphdfs/
+
+RUN echo root:pivotal | chpasswd
+
+RUN apt-get --assume-yes update && apt-get -y install sudo software-properties-common vim less postgresql openssh-server \
+ && add-apt-repository ppa:greenplum/db \
+ && apt-get --assume-yes update \
+ && apt-get -y install greenplum-db-oss \
+ && . /opt/gpdb/greenplum_path.sh \
+ && cp $GPHOME/docs/cli_help/gpconfigs/gpinitsystem_singlenode . \
+ && cp /opt/configs/*.sh /usr/local/bin/ \
+ && chmod +x /usr/local/bin/*.sh \
+ && chmod +x /opt/madlib/*.sh \
+ && cp /opt/madlib/*.sh /usr/local/bin \
+    && /usr/sbin/groupadd gpadmin \
+    && /usr/sbin/useradd  -g gpadmin -m  gpadmin \
+    && echo "gpadmin:pivotal"|chpasswd \
+    && echo "gpadmin        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers \
+    && mv /opt/configs/bash_profile /home/gpadmin/.bash_profile \
+    && mv /opt/configs/bashrc_template /home/gpadmin/.bashrc \
+    && chown -R gpadmin: /home/gpadmin \
+    && mkdir -p /gpdata/master /gpdata/segments \
+    && chown -R gpadmin: /gpdata \
+    && chown -R gpadmin: /opt/gpdb \
+    && chown -R gpadmin:gpadmin /opt/gpdb \
+    && cp  /opt/configs/limits.conf.add /etc/security/limits.conf \
+    && cp  /opt/configs/sysctl.conf.add /etc/security/sysctl.conf \
+       && ssh-keygen -f /root/.ssh/id_rsa -N ''  \
+       && cat /root/.ssh/id_rsa.pub > /root/.ssh/authorized_keys \
+       && mkdir -p /home/gpadmin/.ssh  \
+       && cat /root/.ssh/id_rsa.pub >> /home/gpadmin/.ssh/authorized_keys \
+       && cp /root/.ssh/id_rsa /root/.ssh/id_rsa.pub /home/gpadmin/.ssh/  \
+       && chown gpadmin:gpadmin -R /home/gpadmin/.ssh \
+       && echo "gpdbsne" > /tmp/gpdb-hosts \
+       && cp /opt/configs/gpinitsystem_singlenode /tmp \
+       && chmod 777 /tmp/gpinitsystem_singlenode \
+       && hostname > ~/orig_hostname \
+       && hostname > /tmp/orig_hostname \
+       && echo "127.0.0.1 gpdbsne gpdbsne.localdomain" >> /etc/hosts \
+       && su -c gpadmin -c "echo 'source /usr/local/greenplum-db/greenplum_path.sh' >> .bashrc" \
+       && su -c gpadmin -c "echo 'export MASTER_DATA_DIRECTORY=/gpdata/master/gpseg-1' >> .bashrc" \
+       && locale-gen en_US.UTF-8 \
+       && apt-get clean all \
+       &&  rm -f /etc/service/sshd/down \
+       && /etc/my_init.d/00_regen_ssh_host_keys.sh \
+
+EXPOSE 5432 22
+EXPOSE 40000 40001 40002
+
+VOLUME /data
+# Set the default command to run when starting the container
+
+# ENTRYPOINT ["/bin/bash"]
+#CMD ["/usr/local/bin/entrypoint.sh"]
+
+
+################################################################################
+# Default entry point
+# Files under /docker-entrypoint.d/ will be executed
+################################################################################
+
+COPY configs/docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+
+COPY docker-entrypoint.d/* /docker-entrypoint.d/
+RUN chmod +x /docker-entrypoint.d/*.sh
+
+ONBUILD COPY /docker-entrypoint.d/* /docker-entrypoint.d/
+# Run all the scripts
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+
+# Default command
+CMD ["bin/bash"]

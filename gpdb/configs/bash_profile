@@ -1,0 +1,20 @@
+
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc   # --> Read /etc/bashrc, if present.
+fi
+
+export PATH=$PATH:.
+alias gpdbpath='source /usr/local/greenplum-db/greenplum_path.sh'
+alias hadoopversion='$HADOOP_HOME/bin/hadoop version'
+
+export JAVA_HOME=$(dirname $(dirname $(readlink -f  /usr/bin/java)))
+export MASTER_DATA_DIRECTORY=/gpdata/master/gpseg-1
+
+
+if [ -f /usr/local/greenplum-db/greenplum_path.sh ]; then
+  source /usr/local/greenplum-db/greenplum_path.sh
+fi
+
+if [ -f /opt/gpdb/greenplum_path.sh ]; then
+ source /opt/gpdb/greenplum_path.sh
+fi

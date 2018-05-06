@@ -99,3 +99,28 @@ ENV/
 
 # mypy
 .mypy_cache/
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+*.jar
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Docker project generated files to ignore
+#  if you want to ignore files created by your editor/tools,
+#  please consider a global .gitignore https://help.github.com/articles/ignoring-files
+*.exe
+*.exe~
+*.orig
+test.main
+.*.swp
+.DS_Store
+${SSH*}
+${SSH*}.bak
+*.tar

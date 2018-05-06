@@ -1,0 +1,6 @@
+[maprtech]
+name=MapR Technologies
+baseurl=http://package.mapr.com/releases/v5.2.2/redhat/
+enabled=1
+gpgcheck=1
+protect=1

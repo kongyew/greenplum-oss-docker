@@ -1,0 +1,164 @@
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc   # --> Read /etc/bashrc, if present.
+fi
+
+if [ -f /usr/local/greenplum-db/greenplum_path.sh ]; then
+  source /usr/local/greenplum-db/greenplum_path.sh
+fi
+
+if [ -f /opt/gpdb/greenplum_path.sh ]; then
+ source /opt/gpdb/greenplum_path.sh
+fi
+#---------------
+# Some settings
+#---------------
+
+#set -o notify
+#set -o noclobber
+#set -o ignoreeof
+#set -o nounset
+#set -o xtrace          # useful for debugging
+
+#-----------------------
+# Greeting, motd etc...
+#-----------------------
+
+# Define some colors first:
+red='\e[0;31m'
+RED='\e[1;31m'
+blue='\e[0;34m'
+BLUE='\e[1;34m'
+cyan='\e[0;36m'
+CYAN='\e[1;36m'
+NC='\e[0m'              # No Color
+# --> Nice. Has the same effect as using "ansi.sys" in DOS.
+
+# Looks best on a black background.....
+#echo -e "${CYAN}This is BASH ${RED}${BASH_VERSION%.*}${CYAN}  ${RED}$DISPLAY${NC}\n"
+
+# function _exit()        # function to run upon exit of shell
+# {
+#     #echo -e "${RED}Exit Bashrc${NC}"
+# }
+# trap _exit 0
+
+#---------------
+# Shell prompt
+#---------------
+
+function fastprompt()
+{
+    unset PROMPT_COMMAND
+    case $TERM in
+        *term | rxvt )
+            PS1="[\h] \W > \[\033]0;[\u@\h] \w\007\]" ;;
+        *)
+            PS1="[\h] \W > " ;;
+    esac
+}
+
+function powerprompt()
+{
+    _powerprompt()
+    {
+        LOAD=$(uptime|sed -e "s/.*: \([^,]*\).*/\1/" -e "s/ //g")
+        TIME=$(date +%H:%M)
+    }
+
+    PROMPT_COMMAND=_powerprompt
+    case $TERM in
+        *term | rxvt  )
+            PS1="${cyan}[\$TIME \$LOAD]$NC\n[\h \#] \W > \[\033]0;[\u@\h] \w\007\]" ;;
+        linux )
+            PS1="${cyan}[\$TIME - \$LOAD]$NC\n[\h \#] \w > " ;;
+        * )
+            PS1="[\$TIME - \$LOAD]\n[\h \#] \w > " ;;
+    esac
+}
+
+powerprompt     # this is the default prompt - might be slow
+                # If too slow, use fastprompt instead....
+
+#===============================================================
+#
+# ALIASES AND FUNCTIONS
+#
+#===============================================================
+
+#-------------------
+# Personnal Aliases
+#-------------------
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+# -> Prevents accidentally clobbering files.
+
+alias h='history'
+alias j='jobs -l'
+alias r='rlogin'
+alias which='type -all'
+alias ..='cd ..'
+alias path='echo -e ${PATH//:/\\n}'
+alias vi='vim'
+alias du='du -h'
+alias df='df -kh'
+
+# The 'ls' family (this assumes you use the GNU ls)
+alias ls='ls -hF --color'	# add colors for filetype recognition
+alias lx='ls -lXB'		# sort by extension
+alias lk='ls -lSr'		# sort by size
+alias la='ls -Al'		# show hidden files
+alias lr='ls -lR'		# recursice ls
+alias lt='ls -ltr'		# sort by date
+alias lm='ls -al |more'		# pipe through 'more'
+alias treel='tree -Cs'		# nice alternative to 'ls'
+
+# tailoring 'less'
+# alias more='less'
+# export PAGER=less
+# export LESSCHARSET='latin1'
+# export LESSOPEN='|/usr/bin/lesspipe.sh %s 2>&-' # Use this if lesspipe.sh exists
+# export LESS='-i -N -w  -z-4 -g -e -M -X -F -R -P%t?f%f \
+# :stdin .?pb%pb\%:?lbLine %lb:?bbByte %bb:-...'
+
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+
+startGPDB()
+{
+    export MASTER_DATA_DIRECTORY=/gpdata/master/gpseg-1
+    if [ -f /usr/local/greenplum-db/greenplum_path.sh ]; then
+      source /usr/local/greenplum-db/greenplum_path.sh
+    fi
+
+    if [ -f /opt/gpdb/greenplum_path.sh ]; then
+     source /opt/gpdb/greenplum_path.sh
+    fi
+    gpstart -a
+}
+
+function stopGPDB()
+{
+#   export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    export MASTER_DATA_DIRECTORY=/gpdata/master/gpseg-1
+
+    if [ -f /usr/local/greenplum-db/greenplum_path.sh ]; then
+      source /usr/local/greenplum-db/greenplum_path.sh
+    fi
+
+    if [ -f /opt/gpdb/greenplum_path.sh ]; then
+     source /opt/gpdb/greenplum_path.sh
+    fi
+    gpstop -a
+}
