@@ -8,7 +8,7 @@
 #baseurl: ""
 #remote_theme: daattali/beautiful-jekyll
 # If you are building a GitHub project page then use these settings:
-url: "http://kongyew.github.io/greenplum-oss-docker"
+url: "https://kongyew.github.io/greenplum-oss-docker"
 baseurl: "/greenplum-oss-docker"
 
 # Of course don't forget to change the username and projectname to YOUR username and project
@@ -17,7 +17,7 @@ baseurl: "/greenplum-oss-docker"
 title: Greenplum OSS
 
 # Short description of your site
-description: This site provides use cases and examples for Greenplum with Streamsets [greenplum-streamsets](https://kongc-organization.github.io/greenplum-streamsets/)
+description: 
 
 # --- Navigation bar options --- #
 
@@ -26,8 +26,6 @@ navbar-links:
   About Me: "aboutme"
   Resources:
     - Greenplum home: "http://www.greenplum.org"
-    - Streamsets home: "https://streamsets.com/"
-    - Apache Kafka home: "https://kafka.apache.org/"
     - GitHub Pages: "https://pages.github.com/"
 
 
