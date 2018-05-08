@@ -5,7 +5,7 @@ services:
 script:
   - docker build -t "kochanpivotal/gpdb5oss" -f gpdb/DockerfileOpenSource .
   - docker run --interactive --tty -h gpdbsne "kochanpivotal/gpdb5oss" /bin/bash -c "/usr/local/bin/setupGPDB.sh -g /opt/gpdb;/usr/local/bin/stopGPDB.sh  -g /opt/gpdb"
-  - docker commit -m "GPDB 5 OSS" -a "author" "kochan" "kochanpivotal/gpdb5oss"
+#  - docker commit -m "GPDB 5 OSS" -a "author" "kochan" "kochanpivotal/gpdb5oss"
   - ls -al
 after_script:
   - docker images
