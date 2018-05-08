@@ -2,7 +2,17 @@ sudo: required
 services:
   - docker
 
+before_install:
+  # update is required to update the repositories to see the new packages for
+  # Docker.
+  - sudo apt-get update
+
+  - cd ${TRAVIS_BUILD_DIR}
+  - git clone https://github.com/kongyew/greenplum-oss-docker.git
+  - cd greenplum-oss-docker
+
 script:
+  - cd ${TRAVIS_BUILD_DIR}/greenplum-oss-docker
   - docker build -t "kochanpivotal/gpdb5oss" -f gpdb/DockerfileOpenSource .
   - docker run --interactive --tty -h gpdbsne "kochanpivotal/gpdb5oss" /bin/bash -c "/usr/local/bin/setupGPDB.sh -g /opt/gpdb;/usr/local/bin/stopGPDB.sh  -g /opt/gpdb"
 #  - docker commit -m "GPDB 5 OSS" -a "author" "kochan" "kochanpivotal/gpdb5oss"
