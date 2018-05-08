@@ -4,20 +4,20 @@
 # baseurl is the website's URL without the hostname
 
 # If you are building a simple GitHub user page (http://username.github.io) then use these settings:
-#url: "https://kongc-organization.github.io/g
+#url: "https://kongc-organization.github.io/greenplum-streamsets/"
 #baseurl: ""
 #remote_theme: daattali/beautiful-jekyll
 # If you are building a GitHub project page then use these settings:
-url: "https://kongyew.github.io/greenplum-oss-docker"
-baseurl: "/greenplum-oss-docker"
+# url: "http://kongc-organization.github.io/greenplum-streamsets"
+# baseurl: "/greenplum-streamsets"
 
 # Of course don't forget to change the username and projectname to YOUR username and project
 
 # Name of website
-title: Greenplum OSS
+title: Greenplum and Streamsets
 
 # Short description of your site
-description: 
+description: This site provides use cases and examples for Greenplum with Streamsets [greenplum-streamsets](https://kongc-organization.github.io/greenplum-streamsets/)
 
 # --- Navigation bar options --- #
 
@@ -26,6 +26,8 @@ navbar-links:
   About Me: "aboutme"
   Resources:
     - Greenplum home: "http://www.greenplum.org"
+    - Streamsets home: "https://streamsets.com/"
+    - Apache Kafka home: "https://kafka.apache.org/"
     - GitHub Pages: "https://pages.github.com/"
 
 
