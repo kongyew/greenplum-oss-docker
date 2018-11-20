@@ -3,13 +3,7 @@
 # url is the full website URL
 # baseurl is the website's URL without the hostname
 
-# If you are building a simple GitHub user page (http://username.github.io) then use these settings:
-#url: "https://kongc-organization.github.io/greenplum-streamsets/"
-#baseurl: ""
-#remote_theme: daattali/beautiful-jekyll
-# If you are building a GitHub project page then use these settings:
-# url: "http://kongc-organization.github.io/greenplum-streamsets"
-# baseurl: "/greenplum-streamsets"
+
 
 # Of course don't forget to change the username and projectname to YOUR username and project
 
@@ -97,7 +91,7 @@ share-links-active:
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "https://kongc-organization.github.io/greenplum-streamsets/"  # eg. "deanattali.com/beautiful-jekyll"
+url-pretty: "https://kongyew.github.io/greenplum-oss-docker/"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Web Statistics Section --- #
 
