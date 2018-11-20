@@ -17,7 +17,7 @@
 title: Greenplum and Streamsets
 
 # Short description of your site
-description: This site provides use cases and examples for Greenplum with Streamsets [greenplum-streamsets](https://kongc-organization.github.io/greenplum-streamsets/)
+description: This site provides use cases and examples for Greenplum Open Source [greenplum-oss](https://github.com/kongyew/greenplum-oss-docker)
 
 # --- Navigation bar options --- #
 
@@ -26,8 +26,6 @@ navbar-links:
   About Me: "aboutme"
   Resources:
     - Greenplum home: "http://www.greenplum.org"
-    - Streamsets home: "https://streamsets.com/"
-    - Apache Kafka home: "https://kafka.apache.org/"
     - GitHub Pages: "https://pages.github.com/"
 
 
@@ -68,17 +66,14 @@ footer-link-col: "#404040"
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
   name: kongyew
-
 # Select your active Social Network Links.
 # Uncomment the links you want to show in the footer and add your information to each link.
 # You can reorder the items to define the link order.
 # If you want to add a new link that isn't here, you'll need to also edit the file _data/SocialNetworks.yml
 social-network-links:
-#  rss: false
-  email: "kochan@pivotal.io"
-  #facebook: daattali
-  github: kongyew
-  twitter: kongyew
+#  email: "kochan@pivotal.io"
+#  github: kongyew
+#  twitter: kongyew
 #  reddit: yourname
 #  google-plus: +DeanAttali
    linkedin: kongyew
