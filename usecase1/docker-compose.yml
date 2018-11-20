@@ -1,23 +1,5 @@
 version: '2'
 services:
-  postgres:
-    image: dequis/postgresql-8.3
-    hostname: "postgresql"
-    container_name: postgresql
-    ports:
-      - "6432:5432"
-
-    volumes:
-       - ..:/code
-    tty: true
-    privileged: true
-    links:
-         - gpdb5:gpdbsne
-    networks:
-      mynetwork:
-        aliases:
-          - postgres
-          - postgres.localdomain.com
   gpdb5:
         #build:
         #  context: .
@@ -38,7 +20,6 @@ services:
          - "5432"
         volumes:
          - ..:/code
-
         tty: true
         networks:
           mynetwork:
