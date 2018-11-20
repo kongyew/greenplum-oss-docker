@@ -7,8 +7,7 @@ ENV LANG en_US.UTF-8
 
 # Argument
 ARG build_env=test
-#ARG GPDB_VERSION="5.7.0-rhel6-x86_64"
-#ARG GPDB_DOWNLOAD="greenplum-downloader/DOWNLOAD_5.7.0"
+
 
 # Passing argument to this env variable inside your Dockerfile:
 ENV ENV_GPDB_VERSION=$GPDB_VERSION
@@ -20,7 +19,6 @@ COPY dblink    /opt/dblink/
 COPY gphdfs    /opt/gphdfs/
 
 RUN echo root:pivotal | chpasswd
-
 RUN apt-get --assume-yes update && apt-get -y install sudo software-properties-common vim less postgresql openssh-server \
  && add-apt-repository ppa:greenplum/db \
  && apt-get --assume-yes update \
