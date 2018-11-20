@@ -7,8 +7,6 @@ categories: greenplum opensource docker ubuntu
 
 
 # Using Greenplum OSS
-
-
 This [repository](https://github.com/kongc-organization/greenplum-streamsets/tree/master/usecase1) demonstrates how to use Greenplum OSS.
 
 # Pivotal Greenplum
