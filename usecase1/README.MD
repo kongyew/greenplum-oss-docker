@@ -4,9 +4,9 @@ The  Greenplum Database (GPDB) is an advanced, fully featured, open source data 
 
 # Table of Contents
 1. [Pre-requisites](#Pre-requisites)
-2. [Starting Docker-compose](#Starting Docker-compose)
-3. [Configure Greenplum](#Configure Greenplum)
-4. [Use psql](#use psql)
+2. [Starting Docker-compose](#Starting-Dockercompose)
+3. [Configure Greenplum](#Configure-Greenplum)
+4. [Use psql](#Use-psql)
 
 ## Pre-requisites:
 - [docker-compose](http://docs.docker.com/compose)
