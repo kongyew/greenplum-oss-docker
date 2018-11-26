@@ -92,5 +92,6 @@ $ psql -U gpadmin -d sample_db -c "select count(*) from usertable;"
 ```
 
 ## Screencast
-* [![Screencast : how to clone this repo](https://asciinema.org/a/LIFWP2uK8jcyLHoPJkbO8zsos.svg)](https://asciinema.org/a/LIFWP2uK8jcyLHoPJkbO8zsos)
-* [![Screencast: how to build OSS docker](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM.svg)](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM)
+*  Clone this repo <script id="asciicast-LIFWP2uK8jcyLHoPJkbO8zsos" src="https://asciinema.org/a/LIFWP2uK8jcyLHoPJkbO8zsos.js" async></script>
+* Build Greenplum OSS docker
+<script id="asciicast-TQXTctfnTWjcybogq2n7TgHpM" src="https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM.js" async></script>
