@@ -2,7 +2,8 @@
 
 You can build Greenplum docker image with Ubuntu and Greenplum Open Source debian package.
 
-See this [![asciicast](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM.svg)](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM) for details.
+Screencast:
+1.[![Run build_docker.sh](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM.svg)](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM) for details.
 <script id="asciicast-TQXTctfnTWjcybogq2n7TgHpM" src="https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM.js" async></script>
 
 The `build_docker.sh` is used to build Greenplum OSS. Internally, it uses DockerfileOpenSource that depends on Ubuntu.
