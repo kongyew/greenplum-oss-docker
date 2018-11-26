@@ -9,8 +9,7 @@ categories: greenplum opensource docker ubuntu
 # Using Greenplum OSS
 This [repository](https://github.com/kongyew/greenplum-oss-docker) demonstrates how to use Greenplum OSS.
 
-Screencast:
-[![Run build_docker.sh](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM.svg)](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM) for details.
+* Build Greenplum OSS docker
 <script id="asciicast-TQXTctfnTWjcybogq2n7TgHpM" src="https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM.js" async></script>
 
 #  Greenplum
