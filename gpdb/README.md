@@ -73,3 +73,8 @@ gpadmin=#
 * [Greenplum.org](https://www.greenplum.org/) - Greenplum open source website
 * [Greenplum Youtube channel](https://www.youtube.com/channel/UCIC2TGO-4xNSAJFCJXlJNwA) - Greenplum related videos
 * [PGConf US Youtube channel](https://www.youtube.com/pgconfus/) - Conference videos
+
+
+## Screencast
+* [![Screencast : how to clone this repo](https://asciinema.org/a/LIFWP2uK8jcyLHoPJkbO8zsos.svg)](https://asciinema.org/a/LIFWP2uK8jcyLHoPJkbO8zsos)
+* [![Screencast: how to build OSS docker](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM.svg)](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM)
