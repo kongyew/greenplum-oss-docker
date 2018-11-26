@@ -6,9 +6,6 @@ This readme provides how to build open source docker for Greenplum, so you can s
 ## How to build Greenplum Open Source docker
 This readme provides step-by-step to create a docker image that has Greenplum open source binaries (Ubuntu Only)
 
-* Build Greenplum OSS docker
-<script id="asciicast-TQXTctfnTWjcybogq2n7TgHpM" src="https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM.js" async></script>
-
 For more details, please [follow the procedures in this doc](gpdb/README.md)
 
 ## Use cases
