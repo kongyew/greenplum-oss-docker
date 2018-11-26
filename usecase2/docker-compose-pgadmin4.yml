@@ -1,0 +1,46 @@
+version: '3'
+services:
+  pgadmin4: #https://github.com/postgres/pgadmin4/blob/master/pkg/docker/Dockerfile
+    image: dpage/pgadmin4
+    hostname: "pgadmin4"
+    environment:
+     - PGADMIN_DEFAULT_EMAIL=user@domain.com # https://hub.docker.com/r/dpage/pgadmin4/
+     - PGADMIN_DEFAULT_PASSWORD=SuperSecret
+    ports:
+      - "80:80"
+    volumes:
+       - ..:/code
+    tty: true
+    privileged: true
+
+    networks:
+      mynetwork:
+        aliases:
+          - pgadmin4
+  gpdb5:
+        image: "kochanpivotal/gpdb5oss:latest"
+        command: bin/bash -c "startGPDB.sh  && bin/bash"
+        hostname: "gpdbsne"
+        container_name: gpdbsne
+        ports:
+         - "5432:5432"
+         - "5005:5005"
+         - "5010:5010"
+         - "9022:22"
+         - "40000:40000"
+         - "40001:40001"
+         - "40002:40002"
+        expose:
+         - "5432"
+        volumes:
+         - ..:/code
+        privileged: true
+        tty: true
+        networks:
+          mynetwork:
+            aliases:
+              - gpdbsne
+              - gpdbsne.localdomain.com
+networks:
+    mynetwork:
+      driver: bridge

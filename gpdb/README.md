@@ -1,4 +1,4 @@
-# How to build the Docker Image with Open Source repository in 10 minutes.
+# How to build the Docker Image with Open Source repository in minutes.
 
 You can build Greenplum docker image with Ubuntu and Greenplum Open Source debian package.
 
@@ -17,7 +17,7 @@ sha256:ba58f8911e613018345133bdf54003b9fb051c27d71b843a31fa20e0532089a2
 
 ##  Running the OSS Docker Image
 You can run Greenplum OSS docker image by following the command below.
-1. Run `run_ossdocker.sh` script to start this GPDB instance.
+1. Run `run_ossdocker.sh` script to start this Greenplum (GPDB) instance.
 ```
 $ ./run_ossdocker.sh
 /bin/run-parts
@@ -50,7 +50,7 @@ psql (8.3.23)
 Type "help" for help.
 
 ```
-3. Run this query to retrieve GPDB version.
+3. Run this query to retrieve Greenplum version.
 ```
 $ psql
 psql (8.3.23)
