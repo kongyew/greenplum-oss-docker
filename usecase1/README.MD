@@ -90,3 +90,7 @@ $ psql -U gpadmin -d sample_db -c "select count(*) from usertable;"
      0
 (1 row)
 ```
+
+## Screencast
+* [![Screencast : how to clone this repo](https://asciinema.org/a/LIFWP2uK8jcyLHoPJkbO8zsos.svg)](https://asciinema.org/a/LIFWP2uK8jcyLHoPJkbO8zsos)
+* [![Screencast: how to build OSS docker](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM.svg)](https://asciinema.org/a/TQXTctfnTWjcybogq2n7TgHpM)
