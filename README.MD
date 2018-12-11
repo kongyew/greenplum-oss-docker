@@ -2,6 +2,7 @@
 This readme provides how to build open source docker for Greenplum, so you can start using Greenplum open source binaries.
 
 [![Build Status](https://travis-ci.org/kongyew/greenplum-oss-docker.svg?branch=master)](https://travis-ci.org/kongyew/greenplum-oss-docker)
+[![GitPitch](https://gitpitch.com/assets/badge.svg)](https://gitpitch.com/kongyew/greenplum-oss-docker)
 
 ## How to build Greenplum Open Source docker
 This readme provides step-by-step to create a docker image that has Greenplum open source binaries (Ubuntu Only)
