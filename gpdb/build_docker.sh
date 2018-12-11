@@ -22,7 +22,7 @@ function BuildOpenSourceGreenplum()
   # https://docs.docker.com/engine/reference/commandline/build/#specifying-target-build-stage-target
   # Squash to reduce file size
 #  docker build --build-arg GPDB_VERSION=${GPDB_VERSION} --force-rm --squash -t ${DOCKER_OSS_TAG} -f DockerfileOpenSource .
-  docker build --build-arg GPDB_VERSION="${GPDB_VERSION}"  -t "${DOCKER_OSS_TAG}" -f DockerfileOpenSource .
+  docker build --build-arg GPDB_VERSION="${GPDB_VERSION}",GPDB_HOST="gpdbsne"  -t "${DOCKER_OSS_TAG}" -f DockerfileOpenSource .
 
   # Build docker image
   echo "Build docker image"

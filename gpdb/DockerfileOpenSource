@@ -7,10 +7,11 @@ ENV LANG en_US.UTF-8
 
 # Argument
 ARG build_env=test
-
+ARG GPDB_HOST="gpdbsne"
 
 # Passing argument to this env variable inside your Dockerfile:
 ENV ENV_GPDB_VERSION=$GPDB_VERSION
+ENV GPDB_HOST=$GPDB_HOST
 
 ################################################################################
 COPY configs /opt/configs/
@@ -29,31 +30,31 @@ RUN apt-get --assume-yes update && apt-get -y install sudo software-properties-c
  && chmod +x /usr/local/bin/*.sh \
  && chmod +x /opt/madlib/*.sh \
  && cp /opt/madlib/*.sh /usr/local/bin \
-    && /usr/sbin/groupadd gpadmin \
-    && /usr/sbin/useradd  -g gpadmin -m  gpadmin \
-    && echo "gpadmin:pivotal"|chpasswd \
-    && echo "gpadmin        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers \
-    && mv /opt/configs/bash_profile /home/gpadmin/.bash_profile \
-    && mv /opt/configs/bashrc_template /home/gpadmin/.bashrc \
-    && chown -R gpadmin: /home/gpadmin \
-    && mkdir -p /gpdata/master /gpdata/segments \
-    && chown -R gpadmin: /gpdata \
-    && chown -R gpadmin: /opt/gpdb \
-    && chown -R gpadmin:gpadmin /opt/gpdb \
-    && cp  /opt/configs/limits.conf.add /etc/security/limits.conf \
-    && cp  /opt/configs/sysctl.conf.add /etc/security/sysctl.conf \
+ && /usr/sbin/groupadd gpadmin \
+ && /usr/sbin/useradd  -g gpadmin -m  gpadmin \
+ && echo "gpadmin:pivotal"|chpasswd \
+ && echo "gpadmin        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers \
+ && mv /opt/configs/bash_profile /home/gpadmin/.bash_profile \
+ && mv /opt/configs/bashrc_template /home/gpadmin/.bashrc \
+ && chown -R gpadmin: /home/gpadmin \
+ && mkdir -p /gpdata/master /gpdata/segments \
+ && chown -R gpadmin: /gpdata \
+ && chown -R gpadmin: /opt/gpdb \
+ && chown -R gpadmin:gpadmin /opt/gpdb \
+ && cp  /opt/configs/limits.conf.add /etc/security/limits.conf \
+ && cp  /opt/configs/sysctl.conf.add /etc/security/sysctl.conf \
        && ssh-keygen -f /root/.ssh/id_rsa -N ''  \
        && cat /root/.ssh/id_rsa.pub > /root/.ssh/authorized_keys \
        && mkdir -p /home/gpadmin/.ssh  \
        && cat /root/.ssh/id_rsa.pub >> /home/gpadmin/.ssh/authorized_keys \
        && cp /root/.ssh/id_rsa /root/.ssh/id_rsa.pub /home/gpadmin/.ssh/  \
        && chown gpadmin:gpadmin -R /home/gpadmin/.ssh \
-       && echo "gpdbsne" > /tmp/gpdb-hosts \
+       && echo ${GPDB_HOST} > /tmp/gpdb-hosts \
        && cp /opt/configs/gpinitsystem_singlenode /tmp \
        && chmod 777 /tmp/gpinitsystem_singlenode \
        && hostname > ~/orig_hostname \
        && hostname > /tmp/orig_hostname \
-       && echo "127.0.0.1 gpdbsne gpdbsne.localdomain" >> /etc/hosts \
+       && echo "127.0.0.1 ${GPDB_HOST} ${GPDB_HOST}.localdomain" >> /etc/hosts \
        && su -c gpadmin -c "echo 'source /usr/local/greenplum-db/greenplum_path.sh' >> .bashrc" \
        && su -c gpadmin -c "echo 'export MASTER_DATA_DIRECTORY=/gpdata/master/gpseg-1' >> .bashrc" \
        && locale-gen en_US.UTF-8 \
@@ -70,12 +71,10 @@ VOLUME /data
 # ENTRYPOINT ["/bin/bash"]
 #CMD ["/usr/local/bin/entrypoint.sh"]
 
-
 ################################################################################
 # Default entry point
 # Files under /docker-entrypoint.d/ will be executed
 ################################################################################
-
 COPY configs/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
