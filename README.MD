@@ -10,8 +10,8 @@ This readme provides step-by-step to create a docker image that has Greenplum op
 For more details, please [follow the procedures in this document.](gpdb/README.md)
 
 ## Use cases
-1. [Using psql to access Greenplum](usecase1/README.md)
-2. [Using pgadmin4 to access Greenplum](usecase2/README.md)
+1. [Using psql to access Greenplum](usecase1/README.MD)
+2. [Using pgadmin4 to access Greenplum](usecase2/README.MD)
 
 
 
