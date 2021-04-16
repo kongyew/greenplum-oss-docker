@@ -8,7 +8,7 @@ elif [ -f /etc/lsb-release ]; then # Ubuntu
   major_version=$(OS_MAJOR_VERSION=`sed -rn 's/.*([0-9])\.[0-9].*/\1/p' /etc/lsb-release`)
 fi
 
-check_stat=$(ps -ef | grep 'init' | awk '{print $2}')
+check_stat=$(pgrep 'init' | awk '{print $2}')
 if [ -n "$check_stat" ]
 then
    echo "init is running"
