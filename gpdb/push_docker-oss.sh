@@ -10,7 +10,7 @@ function tag_and_push {
 		docker push $IMAGE_NAME:$1
 	fi
 }
-echo "Pushing open source docker image to https://hub.docker.com/r/kochanpivotal/gpdb5oss/"
+echo "Pushing open source docker image to https://hub.docker.com/r/kochanpivotal/gpdb6oss/"
 LATEST_TAG="latest"
 export IMAGE_NAME=$DOCKER_OSS_TAG
 

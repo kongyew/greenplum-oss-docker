@@ -2,16 +2,20 @@
 #  Ubuntu Dockerfile for open source Greenplum
 #
 #FROM ubuntu:xenial
-FROM phusion/baseimage
+FROM phusion/baseimage:latest-amd64
+
 ENV LANG en_US.UTF-8
 
 # Argument
 ARG build_env=test
 ARG GPDB_HOST="gpdbsne"
+ARG GPDB_VERSION="6-6.15.0"
+ARG GPDB_BINARY="greenplum-db-6"
 
 # Passing argument to this env variable inside your Dockerfile:
-ENV ENV_GPDB_VERSION=$GPDB_VERSION
+ENV GPDB_VERSION=$GPDB_VERSION
 ENV GPDB_HOST=$GPDB_HOST
+ENV GPDB_BINARY=$GPDB_BINARY
 
 ################################################################################
 COPY configs /opt/configs/
@@ -20,18 +24,20 @@ COPY dblink    /opt/dblink/
 COPY gphdfs    /opt/gphdfs/
 
 RUN echo root:pivotal | chpasswd
-RUN apt-get --assume-yes update && apt-get -y install sudo software-properties-common vim less postgresql openssh-server \
+RUN apt-get --assume-yes update && apt-get -y install sudo software-properties-common vim less postgresql openssh-server iputils-ping \
  && add-apt-repository ppa:greenplum/db \
  && apt-get --assume-yes update \
- && apt-get -y install greenplum-db-oss \
- && . /opt/gpdb/greenplum_path.sh \
+ && apt-get -y install ${GPDB_BINARY} \
+ && ln -s /opt/greenplum-db-${GPDB_VERSION} /opt/gpdb
+SHELL ["/bin/bash", "-c"]
+RUN . /opt/gpdb/greenplum_path.sh \
  && cp $GPHOME/docs/cli_help/gpconfigs/gpinitsystem_singlenode . \
  && cp /opt/configs/*.sh /usr/local/bin/ \
  && chmod +x /usr/local/bin/*.sh \
  && chmod +x /opt/madlib/*.sh \
  && cp /opt/madlib/*.sh /usr/local/bin \
  && /usr/sbin/groupadd gpadmin \
- && /usr/sbin/useradd  -g gpadmin -m  gpadmin \
+ && /usr/sbin/useradd -s /bin/bash -g gpadmin -m  gpadmin \
  && echo "gpadmin:pivotal"|chpasswd \
  && echo "gpadmin        ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers \
  && mv /opt/configs/bash_profile /home/gpadmin/.bash_profile \
@@ -54,7 +60,6 @@ RUN apt-get --assume-yes update && apt-get -y install sudo software-properties-c
        && chmod 777 /tmp/gpinitsystem_singlenode \
        && hostname > ~/orig_hostname \
        && hostname > /tmp/orig_hostname \
-       && echo "127.0.0.1 ${GPDB_HOST} ${GPDB_HOST}.localdomain" >> /etc/hosts \
        && su -c gpadmin -c "echo 'source /usr/local/greenplum-db/greenplum_path.sh' >> .bashrc" \
        && su -c gpadmin -c "echo 'export MASTER_DATA_DIRECTORY=/gpdata/master/gpseg-1' >> .bashrc" \
        && locale-gen en_US.UTF-8 \
