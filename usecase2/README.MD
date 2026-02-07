@@ -57,12 +57,12 @@ Kongs-MacBook-Pro:code_spark kochan$
 Once you have access to Greenplum docker instance, you can create database, table with some sample data.
 
 1. Create database and table with sample database
-The scripts to create database and sample data is found at `/code/usercase1/data`.
+The scripts to create database and sample data is found at `/code/usercase2/data`.
 
-Next, run the command '/code/usecase1/data/setupDB.sh'
+Next, run the command '/code/usecase2/data/setupDB.sh'
 ```
-root@gpdbsne:/# cd /code/usecase1/data
-root@gpdbsne:/code/usecase1/data# ./setupDB.sh
+root@gpdbsne:/# cd /code/usecase2/data
+root@gpdbsne:/code/usecase2/data# ./setupDB.sh
 psql:./gpdb_sample.sql:2: NOTICE:  table "usertable" does not exist, skipping
 DROP TABLE
 CREATE TABLE
